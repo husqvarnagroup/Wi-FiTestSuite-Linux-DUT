@@ -1,6 +1,6 @@
 /****************************************************************************
 *
-* Copyright (c) 2015 Wi-Fi Alliance
+* Copyright (c) 2016 Wi-Fi Alliance
 *
 * Permission to use, copy, modify, and/or distribute this software for any
 * purpose with or without fee is hereby granted, provided that the above
@@ -145,12 +145,7 @@ int main(int argc, char *argv[])
     char *pcmdStr = NULL;
     char respStr[WFA_BUFF_512];
 
-    /*  temporarily disable 
-    //start of CLI handling variables
-    char wfaCliBuff[128];
-    FILE *wfaCliFd;
-    char * cliCmd;
-    */
+
     char *tempCmdBuff;
 
     while ((opt = getopt_long(argc, argv, optionString, longIPOptions, &optionIndex)) != -1) 
@@ -316,14 +311,6 @@ int main(int argc, char *argv[])
 
         wfaInterFacePeerConn( &ctrlRecvHandle);
         printf("client got connected\n");
-/*
-        if(FD_ISSET(tmsockfd, &sockSet))
-        {
-            gCaSockfd = wfaAcceptTCPConn(tmsockfd);
-            DPRINT_INFO(WFA_OUT, "accept new connection\n");
-            continue;
-        }
-*/
 
         memset(xcCmdBuf, 0, WFA_BUFF_4K);
         memset(gRespStr, 0, WFA_BUFF_512);
@@ -476,12 +463,7 @@ int main(int argc, char *argv[])
             wfaInterFaceClose(&dutHandle);
             continue;
         }
-/*      if ((bytesRcvd = recv(gSock, caCmdBuf, WFA_BUFF_4K, 0)) <= 0)
-        {
-            DPRINT_WARNING(WFA_WNG, "recv() failed or connection closed prematurely");
-            continue;
-        }
-*/
+
 #if DEBUG 
         for(i = 0; i< bytesRcvd; i++)
             printf("%x ", caCmdBuf[i]);
